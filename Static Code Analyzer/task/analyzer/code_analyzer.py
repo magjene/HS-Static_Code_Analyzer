@@ -52,6 +52,6 @@ Line 5: S001 Too long
 
 
 with open(f'{input()}', 'r', encoding='utf-8') as file:
-    for i, word in enumerate(file.read().split()):
+    for i, word in enumerate(file.read().split('\n')):
         if len(word) > 79:
             print(f'Line {i+1}: S001 Too long')
