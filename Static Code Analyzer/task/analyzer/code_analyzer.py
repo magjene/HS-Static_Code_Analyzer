@@ -49,3 +49,9 @@ Here is the expected output for the given example:
 Line 3: S001 Too long
 Line 5: S001 Too long
 """
+
+
+with open(f'{input()}', 'r', encoding='utf-8') as file:
+    for i, word in enumerate(file.read().split()):
+        if len(word) > 79:
+            print(f'Line {i+1}: S001 Too long')
