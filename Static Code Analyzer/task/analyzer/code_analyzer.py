@@ -87,7 +87,15 @@ def todo(i, r):
 
 funcs = [too_long, indentation, unnecessary_semicolon, two_spaces_comments, todo]
 # with open(f'{input()}', 'r', encoding='utf-8') as file:
-with open(r'D:\pythonProject\Static Code Analyzer\Static Code Analyzer\task\test\test_3.py', 'r', encoding='utf-8') as file:
+with open(r'D:\pythonProject\Static Code Analyzer\Static Code Analyzer\task\test\test_4.py', 'r', encoding='utf-8') as file:
+    count = 0
     for j, row in enumerate(file.read().split('\n')):
+        if row == '':
+            count += 1
+            continue
+        else:
+            if count > 2:
+                print(f'Line {j}: S006 More than two blank lines used before this line')
+            count = 0
         for fun in funcs:
             fun(j + 1, row)
