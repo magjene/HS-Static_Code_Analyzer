@@ -312,5 +312,20 @@ files:
         pass; # Todo something
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/9904#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: |-
+    Wrong answer in test #4
+
+    A wrong number of warning messages. Your program should warn about 4 lines with mistakes in this test case.
+    4 lines that include TODO comments should be found
+
+    Please find below the output of your program during this failed test.
+    Note that the '>' character indicates the beginning of the input line.
+
+    ---
+
+    > test\test_3.py
+    Line 4: S005 TODO found
+  time: Tue, 18 Oct 2022 21:37:04 UTC
 record: -1
