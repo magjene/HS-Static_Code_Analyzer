@@ -79,9 +79,15 @@ def two_spaces_comments(i, r):
             print(f'Line {i}: S004 At least two spaces required before inline comments')
 
 
-funcs = [too_long, indentation, unnecessary_semicolon, two_spaces_comments]
+def todo(i, r):
+    if '# todo' in r.lower():
+        if '# TODO' not in r:
+            print(f'Line {i}: S005 TODO found')
+
+
+funcs = [too_long, indentation, unnecessary_semicolon, two_spaces_comments, todo]
 # with open(f'{input()}', 'r', encoding='utf-8') as file:
-with open(r'D:\pythonProject\Static Code Analyzer\Static Code Analyzer\task\test\test_5.py', 'r', encoding='utf-8') as file:
+with open(r'D:\pythonProject\Static Code Analyzer\Static Code Analyzer\task\test\test_3.py', 'r', encoding='utf-8') as file:
     for j, row in enumerate(file.read().split('\n')):
         for fun in funcs:
             fun(j + 1, row)
