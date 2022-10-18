@@ -315,17 +315,24 @@ feedback_link: https://hyperskill.org/learn/step/9904#comment
 status: Failed
 feedback:
   message: |-
-    Wrong answer in test #4
+    Wrong answer in test #7
 
-    A wrong number of warning messages. Your program should warn about 4 lines with mistakes in this test case.
-    4 lines that include TODO comments should be found
+    Your program didn't warn about more than two blank lines between lines.
 
     Please find below the output of your program during this failed test.
     Note that the '>' character indicates the beginning of the input line.
 
     ---
 
-    > test\test_3.py
-    Line 4: S005 TODO found
-  time: Tue, 18 Oct 2022 21:37:04 UTC
+    > test\test_6.py
+    Line 1: S004 At least two spaces required before inline comments
+    Line 2: S003 Unnecessary semicolon
+    Line 3: S001 Too long
+    Line 3: S003 Unnecessary semicolon
+    Line 6: S001 Too long
+    Line 10: S006 More than two blank lines used before this line
+    Line 13: S003 Unnecessary semicolon
+    Line 13: S004 At least two spaces required before inline comments
+    Line 13: S005 TODO found
+  time: Tue, 18 Oct 2022 21:49:22 UTC
 record: -1
