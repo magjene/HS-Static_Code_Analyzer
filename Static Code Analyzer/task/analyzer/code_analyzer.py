@@ -96,8 +96,8 @@ with open(f'{input()}', 'r', encoding='utf-8') as file:
             count += 1
             continue
         else:
+            for fun in funcs:
+                fun(j + 1, row)
             if count > 2:
                 print(f'Line {j + 1}: S006 More than two blank lines used before this line')
             count = 0
-        for fun in funcs:
-            fun(j + 1, row)
