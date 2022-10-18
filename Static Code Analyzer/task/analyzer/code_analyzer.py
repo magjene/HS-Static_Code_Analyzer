@@ -51,7 +51,37 @@ Line 5: S001 Too long
 """
 
 
-with open(f'{input()}', 'r', encoding='utf-8') as file:
-    for i, word in enumerate(file.read().split('\n')):
-        if len(word) > 79:
-            print(f'Line {i+1}: S001 Too long')
+def too_long(i, r):
+    if len(r) > 79:
+        print(f'Line {i}: S001 Too long')
+
+
+def indentation(i, r):
+    c = 0
+    for letter in r:
+        if letter == ' ':
+            c += 1
+        else:
+            break
+    if c % 4 != 0:
+        print(f'Line {i}: S002 Indentation is not a multiple of four')
+
+
+def unnecessary_semicolon(i, r):
+    if ';' in r:
+        if (';' in r and '#' not in r) or r.find(';') < r.find('#'):
+            print(f'Line {i}: S003 Unnecessary semicolon')
+
+
+def two_spaces_comments(i, r):
+    if '#' in r:
+        if r.find('#') == 1 or (r.find('#') > 1 and (r[r.find('#') - 1] != ' ' or r[r.find('#') - 2] != ' ')):
+            print(f'Line {i}: S004 At least two spaces required before inline comments')
+
+
+funcs = [too_long, indentation, unnecessary_semicolon, two_spaces_comments]
+# with open(f'{input()}', 'r', encoding='utf-8') as file:
+with open(r'D:\pythonProject\Static Code Analyzer\Static Code Analyzer\task\test\test_5.py', 'r', encoding='utf-8') as file:
+    for j, row in enumerate(file.read().split('\n')):
+        for fun in funcs:
+            fun(j + 1, row)
