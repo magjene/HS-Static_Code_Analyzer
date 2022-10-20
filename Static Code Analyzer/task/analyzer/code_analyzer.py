@@ -63,9 +63,7 @@ def indentation(i, r):
 
 def unnecessary_semicolon(i, r):
     if ';' in r:
-        if ('#' not in r and "'" not in r) or \
-                ('#' not in r and r.find("'") < r.find(';') and not(r.find("'") < r.find(';') < r.rfind("'"))) or \
-                ('#' in r and r.find(';') < r.find('#')):
+        if (r[:r.find('#')] if '#' in r else r).strip().endswith(';'):
             print(f'Line {i}: S003 Unnecessary semicolon')
 
 
