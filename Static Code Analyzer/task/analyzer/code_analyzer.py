@@ -57,13 +57,7 @@ def too_long(i, r):
 
 
 def indentation(i, r):
-    c = 0
-    for letter in r:
-        if letter == ' ':
-            c += 1
-        else:
-            break
-    if c % 4 != 0:
+    if (len(r) - len(r.lstrip(' '))) % 4 != 0:
         print(f'Line {i}: S002 Indentation is not a multiple of four')
 
 
@@ -88,8 +82,8 @@ def todo(i, r):
 
 
 funcs = [too_long, indentation, unnecessary_semicolon, two_spaces_comments, todo]
-with open(f'{input()}', 'r', encoding='utf-8') as file:
-# with open(r'D:\pythonProject\Static Code Analyzer\Static Code Analyzer\task\test\test_6.py', 'r', encoding='utf-8') as file:
+# with open(f'{input()}', 'r', encoding='utf-8') as file:
+with open(r'D:\pythonProject\Static Code Analyzer\Static Code Analyzer\task\test\test_6.py', 'r', encoding='utf-8') as file:
     count = 0
     for j, row in enumerate(file.read().split('\n'), start=1):
         if row == '':
