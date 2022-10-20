@@ -1,53 +1,61 @@
 """
 Project: Static Code Analyzer
-Stage 1/5: Search for long lines
+Stage 3/5: Analyze multi-file projects
 
 
 Description
-To make sure your Python code is beautiful and consistently formatted, you should follow the PEP8 specification and best practices recommended by the Python community. This is not always easy, especially for beginners. Luckily, there are special tools called static code analyzers (pylint, flake8, and others) that automatically check that your code meets all the standards and recommendations. These tools don't execute your code but just analyze it and output all the issues they find.
+As a rule, real projects contain more than a single file. Also, project directories often contain not only Python files, and we don't need to check if an HTML file follows PEP8.
 
-In this project, you will create a small static analyzer tool that finds some common stylistic mistakes in Python code. This way, you will familiarize yourself with the concept of static code analysis and improve your Python skills along the way.
-
-PEP8 requires that we should "limit all lines to a maximum of 79 characters", which is designed to make your code more readable. So let's first make a program that checks that code lines are not too long.
+We recommend that you check out a tutorial on realpython.com that can help you to work with files and directories.
 
 Objectives
-In this stage, your program should read Python code from a specified file and perform a single check: the length of code lines should not exceed 79 characters.
+In this stage, you need to improve your program so that it can analyze all Python files inside a specified directory.
 
-Note that:
+Please note that:
 
-The path to the file is obtained from standard input.
-The general output format is:
-Line X: Code Message
-In the format:
+You also need to change the input format. Instead of reading the path from the standard input, the program must obtain it as a command-line argument:
 
-X is the number of the line where the issue was found. The count starts from one.
+> python code_analyzer.py directory-or-file
+The output format also needs to be changed slightly. It should include the path to the analyzed file:
 
-Code is the code of the discovered stylistic issue (like S001).
+Path: Line X: Code Message 
+All output lines must be sorted in ascending order according to the file name, line number, and issue code.
 
-Message is a human-readable description of the issue (optional).
+Non-Python files must be skipped.
 
-For example:
+Once again:
 
-Line 3: S001 Too long
-This format will be used throughout the project with some minor changes.
+It is important that all the checks implemented in the previous stages continue to work properly.
 
-The order of the lines should always be first to last.
-Your program can output another message instead of Too long. The rest of the output must exactly match the provided example. In the code S001, S means a stylistic issue, and 001 is the internal number of the issue.
+If a line contains the same stylistic issue several times, your program must print the information only once. If a line has several issues with different types of error codes, they should be printed in ascending order.
+
+To simplify the solution, we consider it acceptable if your program finds some false-positive stylistic issues in strings, especially in multi-lines ('''...''' and ).
+
+We recommend that you break your program code into a set of functions and classes to avoid confusion.
+
 Examples
-Here is an example of the file's contents:
+Only a single file is specified as the input:
 
-print('What\'s your name?')
-name = input()
-print(f'Hello, {name}')  # here is an obvious comment: this prints a greeting with a name
+> python code_analyzer.py /path/to/file/script.py
+/path/to/file/script.py: Line 1: S004 At least two spaces required before inline comments
+/path/to/file/script.py: Line 2: S003 Unnecessary semicolon
+/path/to/file/script.py: Line 3: S001 Too long line
+/path/to/file/script.py: Line 3: S003 Unnecessary semicolon
+/path/to/file/script.py: Line 6: S001 Too long line
+/path/to/file/script.py: Line 11: S006 More than two blank lines used before this line
+/path/to/file/script.py: Line 13: S003 Unnecessary semicolon
+/path/to/file/script.py: Line 13: S004 At least two spaces required before inline comments
+/path/to/file/script.py: Line 13: S005 TODO found
+The input path is a directory; the output should contain all Python files from it:
 
-very_big_number = 11_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000
-print(very_big_number)
-This code contains two long lines (>79 characters): lines 3 and 5.
-
-Here is the expected output for the given example:
-
-Line 3: S001 Too long
-Line 5: S001 Too long
+> python code_analyzer.py /path/to/project
+/path/to/project/__init__.py: Line 1: S001 Too long line
+/path/to/project/script1.py: Line 1: S004 At least two spaces required before inline comments
+/path/to/project/script1.py: Line 2: S003 Unnecessary semicolon
+/path/to/project/script2.py: Line 1: S004 At least two spaces required before inline comments
+/path/to/project/script2.py: Line 3: S001 Too long line
+/path/to/project/somedir/script.py: Line 3: S001 Too long line
+/path/to/project/test.py: Line 3: Line 13: S003 Unnecessary semicolon
 """
 
 
@@ -78,8 +86,8 @@ def todo(i, r):
 
 
 funcs = [too_long, indentation, unnecessary_semicolon, two_spaces_comments, todo]
-with open(f'{input()}', 'r', encoding='utf-8') as file:
-# with open(r'D:\pythonProject\Static Code Analyzer\Static Code Analyzer\task\test\test_6.py', 'r', encoding='utf-8') as file:
+# with open(f'{input()}', 'r', encoding='utf-8') as file:
+with open(r'D:\pythonProject\Static Code Analyzer\Static Code Analyzer\task\test\test_6.py', 'r', encoding='utf-8') as file:
     count = 0
     for j, row in enumerate(file.read().split('\n'), start=1):
         if row == '':
