@@ -68,9 +68,8 @@ def unnecessary_semicolon(i, r):
 
 
 def two_spaces_comments(i, r):
-    if '#' in r:
-        if r.find('#') == 1 or (r.find('#') > 1 and (r[r.find('#') - 1] != ' ' or r[r.find('#') - 2] != ' ')):
-            print(f'Line {i}: S004 At least two spaces required before inline comments')
+    if '#' in r and not r.startswith('#') and '  #' not in r:
+        print(f'Line {i}: S004 At least two spaces required before inline comments')
 
 
 def todo(i, r):
