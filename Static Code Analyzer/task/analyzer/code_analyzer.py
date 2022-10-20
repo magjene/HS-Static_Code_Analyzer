@@ -76,9 +76,8 @@ def two_spaces_comments(i, r):
 
 
 def todo(i, r):
-    if '# todo' in r.lower():
-        if '# TODO' not in r or r.count('#') > 1 or r.find('#') == 0 or r.find('# TODO') + 5 == len(r) - 1:
-            print(f'Line {i}: S005 TODO found')
+    if '#' in r and r.find('#') < r.lower().find('todo'):
+        print(f'Line {i}: S005 TODO found')
 
 
 funcs = [too_long, indentation, unnecessary_semicolon, two_spaces_comments, todo]
@@ -88,7 +87,6 @@ with open(r'D:\pythonProject\Static Code Analyzer\Static Code Analyzer\task\test
     for j, row in enumerate(file.read().split('\n'), start=1):
         if row == '':
             count += 1
-            continue
         else:
             for fun in funcs:
                 fun(j, row)
