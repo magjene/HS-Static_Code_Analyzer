@@ -250,17 +250,6 @@ files:
     todo()
     todo = 'todo'
   learner_created: false
-- name: test/test_0.py
-  visible: false
-  text: |
-    if True:
-
-
-
-
-     print('hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'); #TODO
-     print('hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'); #TODO
-  learner_created: false
 - name: test/test_1.py
   visible: false
   text: |
@@ -311,9 +300,20 @@ files:
         print('NO TODO HERE;;')
         pass; # Todo something
   learner_created: false
+- name: test/test_0.py
+  visible: false
+  text: |
+    if True:
+
+
+
+
+     print('hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'); #TODO
+     print('hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'); #TODO
+  learner_created: false
 feedback_link: https://hyperskill.org/learn/step/9904#comment
 status: Solved
 feedback:
   message: Congratulations!
-  time: Tue, 18 Oct 2022 21:59:38 UTC
-record: -1
+  time: Thu, 20 Oct 2022 19:08:11 UTC
+record: 2
