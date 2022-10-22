@@ -59,42 +59,50 @@ The input path is a directory; the output should contain all Python files from i
 """
 
 
-def too_long(i, r):
+import os
+import sys
+
+
+def too_long(i, r, e):
     if len(r) > 79:
-        print(f'Line {i}: S001 Too long')
+        print(f'{e}: Line {i}: S001 Too long')
 
 
-def indentation(i, r):
+def indentation(i, r, e):
     if (len(r) - len(r.lstrip(' '))) % 4 != 0:
-        print(f'Line {i}: S002 Indentation is not a multiple of four')
+        print(f'{e}: Line {i}: S002 Indentation is not a multiple of four')
 
 
-def unnecessary_semicolon(i, r):
-    if ';' in r:
-        if (r[:r.find('#')] if '#' in r else r).strip().endswith(';'):
-            print(f'Line {i}: S003 Unnecessary semicolon')
+def unnecessary_semicolon(i, r, e):
+    if (r[:r.find('#')] if '#' in r else r).strip().endswith(';'):
+        print(f'{e}: Line {i}: S003 Unnecessary semicolon')
 
 
-def two_spaces_comments(i, r):
+def two_spaces_comments(i, r, e):
     if '#' in r and not r.startswith('#') and '  #' not in r:
-        print(f'Line {i}: S004 At least two spaces required before inline comments')
+        print(f'{e}: Line {i}: S004 At least two spaces required before inline comments')
 
 
-def todo(i, r):
+def todo(i, r, e):
     if '#' in r and r.find('#') < r.lower().find('todo'):
-        print(f'Line {i}: S005 TODO found')
+        print(f'{e}: Line {i}: S005 TODO found')
 
 
 funcs = [too_long, indentation, unnecessary_semicolon, two_spaces_comments, todo]
-# with open(f'{input()}', 'r', encoding='utf-8') as file:
-with open(r'D:\pythonProject\Static Code Analyzer\Static Code Analyzer\task\test\test_6.py', 'r', encoding='utf-8') as file:
-    count = 0
-    for j, row in enumerate(file.read().split('\n'), start=1):
-        if row == '':
-            count += 1
-        else:
-            for fun in funcs:
-                fun(j, row)
-            if count > 2:
-                print(f'Line {j}: S006 More than two blank lines used before this line')
-            count = 0
+path = ' '.join(sys.argv[1:])
+
+
+with os.scandir(path) as entr:
+    for entry in entr:
+        if entry.is_file() and entry.name.endswith('.py'):
+            with open(path + '\\' + entry.name, 'r', encoding='utf-8') as file:
+                count = 0
+                for j, row in enumerate(file.read().splitlines(), start=1):
+                    if row == '':
+                        count += 1
+                    else:
+                        for fun in funcs:
+                            fun(j, row, f'{path}\\{entry.name}')
+                        if count > 2:
+                            print(f'{path}\\{entry.name}: Line {j}: S006 More than two blank lines used before this line')
+                        count = 0
