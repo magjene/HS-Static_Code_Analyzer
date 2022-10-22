@@ -104,10 +104,10 @@ def open_file(f_path, f_name):
 
 funcs = [too_long, indentation, unnecessary_semicolon, two_spaces_comments, todo]
 path = ' '.join(sys.argv[1:])
-if path.endswith('.py'):
-    open_file('', path)
-else:
+if os.path.isdir(path):
     with os.scandir(path) as entr:
         for entry in entr:
             if entry.is_file() and entry.name.endswith('.py'):
                 open_file(path + '\\', entry.name)
+else:
+    open_file('', path)
