@@ -1,61 +1,77 @@
 """
 Project: Static Code Analyzer
-Stage 3/5: Analyze multi-file projects
+Stage 4/5: Check names according to PEP8
 
 
 Description
-As a rule, real projects contain more than a single file. Also, project directories often contain not only Python files, and we don't need to check if an HTML file follows PEP8.
+As many coders say, naming is one of the hardest things in programming. Good naming makes your code more readable and uniform. Names should also follow style guides. In Python, the basic requirement is using snake_case for function names and CamelCase for class names. Also, there should be only one space between the construction name and the object name. Checking these rules is the next feature that we need to implement.
 
-We recommend that you check out a tutorial on realpython.com that can help you to work with files and directories.
+Check out the Python tutorial about regular expressions: they will help you implement the checks.
 
 Objectives
-In this stage, you need to improve your program so that it can analyze all Python files inside a specified directory.
+In this stage, we need to add three new checks to the program:
 
-Please note that:
+[S007] Too many spaces after construction_name (def or class);
 
-You also need to change the input format. Instead of reading the path from the standard input, the program must obtain it as a command-line argument:
+[S008] Class name class_name should be written in CamelCase;
+
+[S009] Function name function_name should be written in snake_case.
+
+Note that:
+
+Functions names may start or end with underscores (__fun, __init__).
+
+To simplify the task, we will assume that classes are always written as in the following examples:
+
+# a simple class
+class MyClass:
+    pass
+
+# a class based on inheritance
+class MyClass(AnotherClass):
+    pass
+In reality, it's possible to declare a class this way:
+
+class \
+        S:
+    pass
+However, since it is not a common way to declare classes, you can ignore it.
+
+Another assumption is that functions are always declared like this:
+
+def do_magic():
+    pass
+As before:
+
+The program obtains the path to the file or directory via command-line arguments:
 
 > python code_analyzer.py directory-or-file
-The output format also needs to be changed slightly. It should include the path to the analyzed file:
-
-Path: Line X: Code Message 
-All output lines must be sorted in ascending order according to the file name, line number, and issue code.
-
-Non-Python files must be skipped.
-
-Once again:
-
-It is important that all the checks implemented in the previous stages continue to work properly.
-
-If a line contains the same stylistic issue several times, your program must print the information only once. If a line has several issues with different types of error codes, they should be printed in ascending order.
-
-To simplify the solution, we consider it acceptable if your program finds some false-positive stylistic issues in strings, especially in multi-lines ('''...''' and ).
-
-We recommend that you break your program code into a set of functions and classes to avoid confusion.
+All the previously implemented checks should continue to work properly.
 
 Examples
-Only a single file is specified as the input:
+Here is an input example:
 
-> python code_analyzer.py /path/to/file/script.py
-/path/to/file/script.py: Line 1: S004 At least two spaces required before inline comments
-/path/to/file/script.py: Line 2: S003 Unnecessary semicolon
-/path/to/file/script.py: Line 3: S001 Too long line
-/path/to/file/script.py: Line 3: S003 Unnecessary semicolon
-/path/to/file/script.py: Line 6: S001 Too long line
-/path/to/file/script.py: Line 11: S006 More than two blank lines used before this line
-/path/to/file/script.py: Line 13: S003 Unnecessary semicolon
-/path/to/file/script.py: Line 13: S004 At least two spaces required before inline comments
-/path/to/file/script.py: Line 13: S005 TODO found
-The input path is a directory; the output should contain all Python files from it:
+class  Person:
+    pass
 
-> python code_analyzer.py /path/to/project
-/path/to/project/__init__.py: Line 1: S001 Too long line
-/path/to/project/script1.py: Line 1: S004 At least two spaces required before inline comments
-/path/to/project/script1.py: Line 2: S003 Unnecessary semicolon
-/path/to/project/script2.py: Line 1: S004 At least two spaces required before inline comments
-/path/to/project/script2.py: Line 3: S001 Too long line
-/path/to/project/somedir/script.py: Line 3: S001 Too long line
-/path/to/project/test.py: Line 3: Line 13: S003 Unnecessary semicolon
+class user:
+
+    def __init__(self, login: str, password: str):
+        self.login = login
+        self.password = password
+
+    @staticmethod
+    def _print1():
+        print('q')
+
+    @staticmethod
+    def Print2():
+        print('q')
+The expected output for this code is:
+
+/path/to/file/script.py: Line 1: S007 Too many spaces after 'class'
+/path/to/file/script.py: Line 4: S008 Class name 'user' should use CamelCase
+/path/to/file/script.py: Line 15: S009 Function name 'Print2' should use snake_case
 """
 
 
