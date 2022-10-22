@@ -88,21 +88,26 @@ def todo(i, r, e):
         print(f'{e}: Line {i}: S005 TODO found')
 
 
+def open_file(f_path, f_name):
+    with open(f_path + f_name, 'r', encoding='utf-8') as file:
+        count = 0
+        for j, row in enumerate(file.read().splitlines(), start=1):
+            if row == '':
+                count += 1
+            else:
+                for fun in funcs:
+                    fun(j, row, f'{f_path}{f_name}')
+                if count > 2:
+                    print(f'{f_path}{f_name}: Line {j}: S006 More than two blank lines used before this line')
+                count = 0
+
+
 funcs = [too_long, indentation, unnecessary_semicolon, two_spaces_comments, todo]
 path = ' '.join(sys.argv[1:])
-
-
-with os.scandir(path) as entr:
-    for entry in entr:
-        if entry.is_file() and entry.name.endswith('.py'):
-            with open(path + '\\' + entry.name, 'r', encoding='utf-8') as file:
-                count = 0
-                for j, row in enumerate(file.read().splitlines(), start=1):
-                    if row == '':
-                        count += 1
-                    else:
-                        for fun in funcs:
-                            fun(j, row, f'{path}\\{entry.name}')
-                        if count > 2:
-                            print(f'{path}\\{entry.name}: Line {j}: S006 More than two blank lines used before this line')
-                        count = 0
+if path.endswith('.py'):
+    open_file('', path)
+else:
+    with os.scandir(path) as entr:
+        for entry in entr:
+            if entry.is_file() and entry.name.endswith('.py'):
+                open_file(path + '\\', entry.name)
