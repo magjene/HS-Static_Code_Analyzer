@@ -441,6 +441,9 @@ files:
 - name: test/this_stage/test_7.py.bak
   visible: true
   learner_created: true
+- name: test/this_stage/test_9.py.bak
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/9906#comment
 status: Unchecked
 record: 4

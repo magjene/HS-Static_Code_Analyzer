@@ -116,8 +116,8 @@ def class_name(i, r, e):
 
 
 def def_name(i, r, e):
-    ...
-        # print(f'{e}: Line {i}: S009 Function name 'Print2' should use snake_case')
+    if re.match('def .*[A-Z].*', r):
+        print(f"{e}: Line {i}: S009 Function name '{re.match('def .*', r).group()[4:-3]}' should use snake_case")
 
 
 def open_file(f_path, f_name):

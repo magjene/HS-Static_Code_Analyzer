@@ -9,5 +9,5 @@ def Wow():
     pass
 
 
-def СamelCase():
+def сamelCase():
     pass
