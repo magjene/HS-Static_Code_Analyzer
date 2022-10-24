@@ -112,7 +112,7 @@ def spaces_def_class(i, r, e):
 
 def class_name(i, r, e):
     if re.match('class [a-z]', r) or re.match('class .*_.*', r):
-        print(f"{e}: Line {i}: S008 Class name 'user' should use CamelCase")
+        print(f"{e}: Line {i}: S008 Class name '{re.match('class .*', r).group()[6:-1]}' should use CamelCase")
 
 
 def def_name(i, r, e):

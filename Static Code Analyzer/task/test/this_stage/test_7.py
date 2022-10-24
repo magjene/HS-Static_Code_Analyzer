@@ -6,7 +6,7 @@ class spaces:
     pass
 
 
-class Snake_case:
+class snake_case:
     pass
 
 
