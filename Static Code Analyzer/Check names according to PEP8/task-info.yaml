@@ -391,6 +391,23 @@ files:
     if __name__ == '__main__':
         AnalyzerTest("analyzer.code_analyzer").run_tests()
   learner_created: false
+- name: test/this_stage/test_9.py
+  visible: false
+  text: |
+    def __init__():
+        def correct_function():
+            pass
+
+        pass
+
+
+    def Wow():
+        pass
+
+
+    def CamelCase():
+        pass
+  learner_created: false
 - name: test/this_stage/test_7.py
   visible: false
   text: |
@@ -409,23 +426,6 @@ files:
     class Inheritance(CorrectOne):
         pass
   learner_created: false
-- name: test/this_stage/test_9.py
-  visible: false
-  text: |
-    def __init__():
-        def correct_function():
-            pass
-
-        pass
-
-
-    def Wow():
-        pass
-
-
-    def CamelCase():
-        pass
-  learner_created: false
 - name: test/this_stage/test_8.py
   visible: false
   text: |
@@ -440,4 +440,4 @@ files:
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/9906#comment
 status: Unchecked
-record: -1
+record: 4

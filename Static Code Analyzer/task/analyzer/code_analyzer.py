@@ -77,6 +77,7 @@ The expected output for this code is:
 
 import os
 import sys
+import re
 
 
 def too_long(i, r, e):
@@ -104,6 +105,21 @@ def todo(i, r, e):
         print(f'{e}: Line {i}: S005 TODO found')
 
 
+def spaces_def_class(i, r, e):
+    if re.match('def  ', r) or re.match('class  ', r):
+        print(f"{e}: Line {i}: S007 Too many spaces after '{'def' if re.match('def', r) else 'class'}'")
+
+
+def class_name(i, r, e):
+    ...
+        # print(f'{e}: Line {i}: S008 Class name 'user' should use CamelCase')
+
+
+def def_name(i, r, e):
+    ...
+        # print(f'{e}: Line {i}: S009 Function name 'Print2' should use snake_case')
+
+
 def open_file(f_path, f_name):
     with open(f_path + f_name, 'r', encoding='utf-8') as file:
         count = 0
@@ -118,7 +134,8 @@ def open_file(f_path, f_name):
                 count = 0
 
 
-funcs = [too_long, indentation, unnecessary_semicolon, two_spaces_comments, todo]
+funcs = [too_long, indentation, unnecessary_semicolon, two_spaces_comments, todo,
+         spaces_def_class, class_name, def_name]
 path = ' '.join(sys.argv[1:])
 if os.path.isdir(path):
     with os.scandir(path) as entr:
