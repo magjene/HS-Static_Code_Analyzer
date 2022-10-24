@@ -106,8 +106,8 @@ def todo(i, r, e):
 
 
 def spaces_def_class(i, r, e):
-    if re.match(' *def  ', r) or re.match('class  ', r):
-        print(f"{e}: Line {i}: S007 Too many spaces after '{'def' if re.match('def', r) else 'class'}'")
+    if re.match(' *def  |class  ', r):
+        print(f"{e}: Line {i}: S007 Too many spaces after '{'def' if re.match(' *def', r) else 'class'}'")
 
 
 def class_name(i, r, e):
