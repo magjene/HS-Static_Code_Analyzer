@@ -111,8 +111,8 @@ def spaces_def_class(i, r, e):
 
 
 def class_name(i, r, e):
-    ...
-        # print(f'{e}: Line {i}: S008 Class name 'user' should use CamelCase')
+    if re.match('class [a-z].*_.*', r):
+        print(f"{e}: Line {i}: S008 Class name 'user' should use CamelCase")
 
 
 def def_name(i, r, e):
